@@ -19,6 +19,12 @@ $$  /   \$$ |\$$$$$$$\ $$$$$$$  |$$$$$$$  |$$ |  $$ |\$$$$$$  | \$$$$  |
 """)
 # 设置配置
 opt = webdriver.EdgeOptions()
+
+# 设置接受不受信任的SSL证书
+capabilities = options.to_capabilities()
+capabilities['acceptSslCerts'] = True
+capabilities['acceptInsecureCerts'] = True
+ 
 opt.add_argument('--headless')
 opt.add_argument('--disable-gpu')
 opt.add_experimental_option('excludeSwitches', ['enable-logging'])
@@ -28,7 +34,7 @@ opt.add_experimental_option('excludeSwitches', ['enable-logging'])
 def init():
     path = "Driver/msedgedriver.exe"
     service = Service(service=path)
-    driver = webdriver.Edge(service=service, options=opt)
+    driver = webdriver.Edge(service=service, options=opt,capabilities=capabilities)
     return driver
 
 
